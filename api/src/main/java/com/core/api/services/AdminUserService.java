@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.core.api.mapper.AdminUserMapper;
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Service
 public class AdminUserService {
@@ -12,50 +14,54 @@ public class AdminUserService {
     @Autowired
     private AdminUserMapper adminUserMapper;
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(AdminUserService.class);
+
     public String getNombre(Integer id){
-        System.out.println("getNombre :: ID -> :: "+ id);
+        LOGGER.info("getNombre :: ID -> :: "+ id);
         return this.adminUserMapper.getNombre(id);
     }
     public Persona getPersona(Integer id){
-        System.out.println("getNombre :: ID -> :: "+ id);
+        LOGGER.info("getNombre :: ID -> :: "+ id);
         return this.adminUserMapper.getPersona(id);
     }
 
     public Integer insertaPersona(Persona persona){
-        System.out.println("insertaPersona :: Nombre y Apellido -> :: "+ persona.toString());
+        LOGGER.info("insertaPersona :: Nombre y Apellido -> :: "+ persona.toString());
         return this.adminUserMapper.insertaPersona(persona);
     }
 
     public Integer deletePersona(Integer id){
-        System.out.println("deletePersona :: ID -> :: "+ id);
+        LOGGER.info("deletePersona :: ID -> :: "+ id);
         return this.adminUserMapper.deletePersona(id);
     }
 
     public void getListPersonas(){
-        System.out.println("getListPersonas  :: ");
+        LOGGER.info("getListPersonas  :: ");
         List<Persona> listado = this.adminUserMapper.getListPersonas();
         for (Persona persona: listado) {
-            System.out.println("Persona -> :: " + persona.getNombre() + " "+ persona.getApellido());
+            LOGGER.info("Persona -> :: " + persona.getNombre() + " "+ persona.getApellido());
         }
-        System.out.println("PROCESO FINALIZADO");
+        LOGGER.info("PROCESO FINALIZADO");
     }
 
     public Integer actualizaPersona(Persona newData){
-        System.out.println("actualizaPersona :: Inicio ");
+        LOGGER.info("actualizaPersona :: Inicio ");
         if(newData.getId() == null){
-            System.out.println("EL ID DE ENTRADA ES NULL :: FIN ");
+            LOGGER.info("EL ID DE ENTRADA ES NULL :: FIN ");
             return 0;
         }else{
-            System.out.println("Parametros Entrada:: -> ::" + newData.toString());
+            LOGGER.info("Parametros Entrada:: -> ::" + newData.toString());
             Persona oldData = this.getPersona(newData.getId());
-            System.out.println("Parametros sacados de la bd:: -> ::" + oldData.toString());
+            LOGGER.info("Parametros sacados de la bd:: -> ::" + oldData.toString());
             //VALIDACIÓN PARAMETROS
+
+
             String nombre = (newData.getNombre() != "" && newData.getNombre() != null) ? newData.getNombre() : oldData.getNombre();
             String apellido = (newData.getApellido() != "" && newData.getApellido() != null) ? newData.getApellido(): oldData.getApellido();
 
             newData.setNombre(nombre);
             newData.setApellido(apellido);
-            System.out.println("Parametros enviados:: -> ::" + newData.toString());
+            LOGGER.info("Parametros enviados:: -> ::" + newData.toString());
 
             return this.adminUserMapper.actualizaPersona(newData);
         }

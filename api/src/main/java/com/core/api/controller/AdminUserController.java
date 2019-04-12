@@ -1,12 +1,16 @@
 package com.core.api.controller;
 
 import com.core.api.models.Persona;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.core.api.services.AdminUserService;
 
 @RestController
 public class AdminUserController {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(AdminUserController.class);
 
     @Autowired
     private AdminUserService adminUserService;
@@ -19,34 +23,34 @@ public class AdminUserController {
 
     @PostMapping(value = "/persona/{id}")
     public @ResponseBody
-    String buscaPersona2(@PathVariable("id") Integer id){
-        System.out.println("buscaPersona :: ID -> :: "+ id);
+    String buscaPersona(@PathVariable("id") Integer id){
+        LOGGER.info("buscaPersona :: ID -> :: "+ id);
         return this.adminUserService.getNombre(id);
     }
 
     @PostMapping(value = "/crearPersona")
     public @ResponseBody Integer creaPersona(@RequestBody Persona persona){
-        System.out.println("creaPersona PRIMERA PARTE :: DATOS -> :: " + persona.toString());
+        LOGGER.info("creaPersona PRIMERA PARTE :: DATOS -> :: " + persona.toString());
         return this.adminUserService.insertaPersona(persona);
 
     }
 
     @PostMapping(value = "/delete/persona/{id}")
     public @ResponseBody Integer deletePersona(@PathVariable("id") Integer id){
-        System.out.println("deletePersona :: ID -> :: "+ id);
+        LOGGER.info("deletePersona :: ID -> :: "+ id);
         return this.adminUserService.deletePersona(id);
     }
 
     @GetMapping(value = "/personas")
     public @ResponseBody void buscaPersonas(){
-        System.out.println("BUSCA PERSONAS INICIO");
+        LOGGER.info("BUSCA PERSONAS INICIO");
         this.adminUserService.getListPersonas();
-        System.out.println("BUSCA PERSONAS TERMINO");
+        LOGGER.info("BUSCA PERSONAS TERMINO");
     }
 
     @PutMapping(value = "/actualiza/persona")
     public @ResponseBody Integer actualizaPersona(@RequestBody Persona persona){
-        System.out.println("ACTUALIZA PERSONAS INICIO");
+        LOGGER.info("ACTUALIZA PERSONAS INICIO");
         return this.adminUserService.actualizaPersona(persona);
     }
 }
