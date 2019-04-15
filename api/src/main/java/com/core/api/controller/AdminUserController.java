@@ -24,20 +24,20 @@ public class AdminUserController {
     @PostMapping(value = "/persona/{id}")
     public @ResponseBody
     String buscaPersona(@PathVariable("id") Integer id){
-        LOGGER.info("buscaPersona :: ID -> :: "+ id);
+        LOGGER.info("buscaPersona :: ID -> :: ", id);
         return this.adminUserService.getNombre(id);
     }
 
     @PostMapping(value = "/crearPersona")
     public @ResponseBody Integer creaPersona(@RequestBody Persona persona){
-        LOGGER.info("creaPersona PRIMERA PARTE :: DATOS -> :: " + persona.toString());
+        LOGGER.info("creaPersona PRIMERA PARTE :: DATOS -> :: " , persona.toString());
         return this.adminUserService.insertaPersona(persona);
 
     }
 
     @PostMapping(value = "/delete/persona/{id}")
     public @ResponseBody Integer deletePersona(@PathVariable("id") Integer id){
-        LOGGER.info("deletePersona :: ID -> :: "+ id);
+        LOGGER.info("deletePersona :: ID -> :: ", id);
         return this.adminUserService.deletePersona(id);
     }
 

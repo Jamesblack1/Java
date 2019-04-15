@@ -17,21 +17,21 @@ public class AdminUserService {
     private static final Logger LOGGER = LoggerFactory.getLogger(AdminUserService.class);
 
     public String getNombre(Integer id){
-        LOGGER.info("getNombre :: ID -> :: "+ id);
+        LOGGER.info("getNombre :: ID -> :: ", id);
         return this.adminUserMapper.getNombre(id);
     }
     public Persona getPersona(Integer id){
-        LOGGER.info("getNombre :: ID -> :: "+ id);
+        LOGGER.info("getNombre :: ID -> :: ", id);
         return this.adminUserMapper.getPersona(id);
     }
 
     public Integer insertaPersona(Persona persona){
-        LOGGER.info("insertaPersona :: Nombre y Apellido -> :: "+ persona.toString());
+        LOGGER.info("insertaPersona :: Nombre y Apellido -> :: ", persona.toString());
         return this.adminUserMapper.insertaPersona(persona);
     }
 
     public Integer deletePersona(Integer id){
-        LOGGER.info("deletePersona :: ID -> :: "+ id);
+        LOGGER.info("deletePersona :: ID -> :: ", id);
         return this.adminUserMapper.deletePersona(id);
     }
 
@@ -39,7 +39,7 @@ public class AdminUserService {
         LOGGER.info("getListPersonas  :: ");
         List<Persona> listado = this.adminUserMapper.getListPersonas();
         for (Persona persona: listado) {
-            LOGGER.info("Persona -> :: " + persona.getNombre() + " "+ persona.getApellido());
+            LOGGER.info("Persona -> :: " , persona.getNombre() , " ", persona.getApellido());
         }
         LOGGER.info("PROCESO FINALIZADO");
     }
@@ -52,7 +52,7 @@ public class AdminUserService {
         }else{
             LOGGER.info("Parametros Entrada:: -> ::" + newData.toString());
             Persona oldData = this.getPersona(newData.getId());
-            LOGGER.info("Parametros sacados de la bd:: -> ::" + oldData.toString());
+            LOGGER.info("Parametros sacados de la bd:: -> ::" , oldData.toString());
             //VALIDACIÓN PARAMETROS
 
 
@@ -61,7 +61,7 @@ public class AdminUserService {
 
             newData.setNombre(nombre);
             newData.setApellido(apellido);
-            LOGGER.info("Parametros enviados:: -> ::" + newData.toString());
+            LOGGER.info("Parametros enviados:: -> ::" , newData.toString());
 
             return this.adminUserMapper.actualizaPersona(newData);
         }
