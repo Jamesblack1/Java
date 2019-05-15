@@ -3,6 +3,7 @@ package com.core.api.controller;
 import com.core.api.component.StatusAppComponent;
 import com.core.api.models.Persona;
 import com.google.gson.Gson;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ public class AdminUserController {
         this.adminUserService = adminUserService;
     }
 
+    @ApiOperation(value = "Find an user", notes = "Return a user by Id" )
     @PostMapping(value = "/persona/{id}")
     public @ResponseBody
     String buscaPersona(@PathVariable("id") Integer id){
