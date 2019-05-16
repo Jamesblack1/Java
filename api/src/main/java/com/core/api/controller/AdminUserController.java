@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.core.api.services.AdminUserService;
 
+import java.util.List;
+
 @RestController
 public class AdminUserController {
 
@@ -50,10 +52,9 @@ public class AdminUserController {
 
     @ApiOperation(value = "Trae un listado de personas", response = Integer.class)
     @GetMapping(value = "/personas")
-    public @ResponseBody void buscaPersonas(){
+    public @ResponseBody List<Persona> buscaPersonas(){
         LOGGER.info("BUSCA PERSONAS INICIO");
-        this.adminUserService.getListPersonas();
-        LOGGER.info("BUSCA PERSONAS TERMINO");
+        return this.adminUserService.getListPersonas();
     }
 
     @ApiOperation(value = "Actualiza una persona", response = Integer.class)

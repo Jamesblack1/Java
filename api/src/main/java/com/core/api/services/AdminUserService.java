@@ -35,13 +35,11 @@ public class AdminUserService {
         return this.adminUserMapper.deletePersona(id);
     }
 
-    public void getListPersonas(){
+    public List<Persona> getListPersonas(){
         LOGGER.info("getListPersonas  :: ");
         List<Persona> listado = this.adminUserMapper.getListPersonas();
-        for (Persona persona: listado) {
-            LOGGER.info("Persona -> :: {}" , persona.toString());
-        }
         LOGGER.info("PROCESO FINALIZADO");
+        return listado;
     }
 
     public Integer actualizaPersona(Persona newData){
