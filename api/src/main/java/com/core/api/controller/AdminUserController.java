@@ -25,7 +25,7 @@ public class AdminUserController {
         this.adminUserService = adminUserService;
     }
 
-    @ApiOperation(value = "Find an user", notes = "Return a user by Id" )
+    @ApiOperation(value = "Busca persona por id", response = String.class)
     @PostMapping(value = "/persona/{id}")
     public @ResponseBody
     String buscaPersona(@PathVariable("id") Integer id){
@@ -33,6 +33,7 @@ public class AdminUserController {
         return this.adminUserService.getNombre(id);
     }
 
+    @ApiOperation(value = "Crea una persona", response = Integer.class)
     @PostMapping(value = "/crearPersona")
     public @ResponseBody Integer creaPersona(@RequestBody Persona persona){
         LOGGER.info("creaPersona PRIMERA PARTE :: DATOS -> :: {0}" , persona.toString());
@@ -40,12 +41,14 @@ public class AdminUserController {
 
     }
 
+    @ApiOperation(value = "Borrra una persona", response = Integer.class)
     @PostMapping(value = "/delete/persona/{id}")
     public @ResponseBody Integer deletePersona(@PathVariable("id") Integer id){
         LOGGER.info("deletePersona :: ID -> :: {0}", id);
         return this.adminUserService.deletePersona(id);
     }
 
+    @ApiOperation(value = "Trae un listado de personas", response = Integer.class)
     @GetMapping(value = "/personas")
     public @ResponseBody void buscaPersonas(){
         LOGGER.info("BUSCA PERSONAS INICIO");
@@ -53,19 +56,12 @@ public class AdminUserController {
         LOGGER.info("BUSCA PERSONAS TERMINO");
     }
 
+    @ApiOperation(value = "Actualiza una persona", response = Integer.class)
     @PutMapping(value = "/actualiza/persona")
     public @ResponseBody Integer actualizaPersona(@RequestBody Persona persona){
         LOGGER.info("ACTUALIZA PERSONAS INICIO");
         return this.adminUserService.actualizaPersona(persona);
     }
 
-    @GetMapping(value = "/status", produces = "application/json")
-    public @ResponseBody
-    String getStatus() throws Exception {
-        LOGGER.info("status INICIO");
-        String json = new Gson().toJson(StatusAppComponent.getInstance().getStatus());
-        LOGGER.info("Status [response] -> {}", json);
-        LOGGER.info("status TERMINO");
-        return json;
-    }
+
 }

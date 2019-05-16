@@ -39,7 +39,7 @@ public class AdminUserService {
         LOGGER.info("getListPersonas  :: ");
         List<Persona> listado = this.adminUserMapper.getListPersonas();
         for (Persona persona: listado) {
-            LOGGER.info("Persona -> :: {0} {1}" , persona.getNombre(), persona.getApellido());
+            LOGGER.info("Persona -> :: {}" , persona.toString());
         }
         LOGGER.info("PROCESO FINALIZADO");
     }
