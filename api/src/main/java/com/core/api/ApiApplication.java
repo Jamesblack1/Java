@@ -1,6 +1,6 @@
 package com.core.api;
 
-import com.core.api.Utils.metricas.HttpRemoteClient;
+import com.core.api.Utils.HttpRemoteClient;
 import com.core.api.component.StatusAppComponent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,17 +1,8 @@
 package com.core.api.component;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.net.InetSocketAddress;
-import java.net.Socket;
-
-import com.core.api.Utils.metricas.Health.StatusService;
-import com.core.api.json.response.StatusAppMetricasResponse;
-import com.core.api.json.response.StatusMetricasResponse;
+import com.core.api.Utils.Health.StatusService;
+import com.core.api.json.StatusAppMetricasResponse;
+import com.core.api.json.StatusMetricasResponse;
 import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,6 +20,7 @@ public class StatusAppComponent {
 
     @Autowired
     private StatusAppJdbcComponent statusAppJdbcComponent;
+
 
     private static StatusAppMetricasResponse _statusResponse = null;
 

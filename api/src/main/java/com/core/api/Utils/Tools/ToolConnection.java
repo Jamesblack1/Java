@@ -1,8 +1,9 @@
-package com.core.api.Utils.metricas.Tools;
+package com.core.api.Utils.Tools;
 
 import com.core.api.component.CloseResources;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -11,9 +12,10 @@ import java.io.PrintWriter;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 
-public class connection {
+@Component
+public class ToolConnection {
 
-    private static final Logger LOG = LoggerFactory.getLogger(connection.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ToolConnection.class);
 
     /**
      * @param address

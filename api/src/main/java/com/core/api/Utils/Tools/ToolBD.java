@@ -1,6 +1,9 @@
-package com.core.api.Utils.metricas.Tools;
+package com.core.api.Utils.Tools;
 
-public class bd {
+import org.springframework.stereotype.Component;
+
+@Component
+public class ToolBD {
 
     public String builderUrlConnection(String url, String user, String pass){
         String respuesta;

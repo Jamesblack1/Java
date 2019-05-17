@@ -5,29 +5,34 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import com.core.api.Utils.Tools.ToolBD;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+
 
 @Component
 public class StatusAppJdbcComponent {
 
     private static final Logger LOG = LoggerFactory.getLogger(StatusAppJdbcComponent.class);
 
+    @Autowired
+    private ToolBD toolBD;
 
-//    @Value("${spring.datasource.url}")
+    @Value("${spring.datasource.url}")
 
-    private String appUrlJDBC = "jdbc:postgresql://localhost:5433/test";
+    private String appUrlJDBC;
 
-//    @Value("${spring.datasource.username}")
-    private String appUserJDBC = "postgres";
+    @Value("${spring.datasource.username}")
+    private String appUserJDBC;
 
-//    @Value("${spring.datasource.password}")
-    private String appPassJDBC = "12345678";
+    @Value("${spring.datasource.password}")
+    private String appPassJDBC;
 
-//    @Value("${spring.datasource.driverClassName}")
-    private String appDriverClassJDBC = "org.postgresql.Driver";
+    @Value("${spring.datasource.driverClassName}")
+    private String appDriverClassJDBC;
 
 
     public static final String SQL_SELECT_FROM_DUAL = "select current_timestamp";
@@ -38,17 +43,14 @@ public class StatusAppJdbcComponent {
 
 
     protected boolean connectAviable(String url, String driverClass, String user, String pass) {
-        LOG.info(" URL :: ->{}", url);
-        LOG.info(" DRIVER :: ->{}", driverClass);
-        LOG.info(" USER :: ->{}", user);
-        LOG.info(" PASS :: ->{}", pass);
         boolean response = Boolean.FALSE;
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
+        String connection_string = toolBD.builderUrlConnection(url, user, pass);
         try {
             Class.forName(driverClass);
-            connection = DriverManager.getConnection(url, user, pass);
+            connection = DriverManager.getConnection(connection_string);
             preparedStatement = connection.prepareStatement(SQL_SELECT_FROM_DUAL);
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
@@ -63,10 +65,7 @@ public class StatusAppJdbcComponent {
         return response;
     }
 
-    public String getAppUrlJDBC() {
-        LOG.info("aca  appUrlJDBC:: ->  {}", this.appUrlJDBC);
-        return this.appUrlJDBC;
-    }
+    public String getAppUrlJDBC() { return this.appUrlJDBC; }
 
     public void setAppUrlJDBC(String appUrlJDBC) {
         this.appUrlJDBC = appUrlJDBC;

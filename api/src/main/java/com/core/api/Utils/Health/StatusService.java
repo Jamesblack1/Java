@@ -1,4 +1,4 @@
-package com.core.api.Utils.metricas.Health;
+package com.core.api.Utils.Health;
 
 import org.springframework.stereotype.Service;
 

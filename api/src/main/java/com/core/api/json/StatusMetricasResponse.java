@@ -1,4 +1,4 @@
-package com.core.api.json.response;
+package com.core.api.json;
 
 public class StatusMetricasResponse {
 
